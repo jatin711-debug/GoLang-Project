@@ -1,14 +1,14 @@
 package render
 
 import (
-	"bytes"
-	"fmt"
 	"go-project/pkg/models"
 	"go-project/pkg/config"
-	"html/template"
-	"log"
-	"net/http"
 	"path/filepath"
+	"html/template"
+	"net/http"
+	"bytes"
+	"fmt"
+	"log"
 )
 
 var app *config.AppConfig
