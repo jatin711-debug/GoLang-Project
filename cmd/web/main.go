@@ -1,21 +1,29 @@
 package main
 
 import (
-	"go-project/pkg/handlers"
-	"go-project/pkg/config"
-	"go-project/pkg/render"
-	"net/http"
 	"fmt"
+	"go-project/pkg/config"
+	"go-project/pkg/handlers"
+	"go-project/pkg/render"
 	"log"
+	"net/http"
+	"time"
+
+	"github.com/alexedwards/scs/v2"
 )
 
 const portNumber string = ":8080"
-
+var app config.AppConfig
+var session *scs.SessionManager
 
 func main() {
-
-	var app config.AppConfig
-
+	app.InProduction = false
+	session = scs.New()
+	session.Lifetime = 24 * time.Hour
+	session.Cookie.Persist = true
+	session.Cookie.SameSite = http.SameSiteLaxMode
+	session.Cookie.Secure = app.InProduction
+	app.Session = session
 	tc, err := render.CreateTemplateCache()
 
 	if err != nil {
