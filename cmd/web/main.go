@@ -1,3 +1,5 @@
+// run project from base directory using->  go run .\cmd\web\main.go .\cmd\web\middleware.go .\cmd\web\routes.go
+
 package main
 
 import (
@@ -8,7 +10,6 @@ import (
 	"log"
 	"net/http"
 	"time"
-
 	"github.com/alexedwards/scs/v2"
 )
 
@@ -34,9 +35,7 @@ func main() {
 	repo := handlers.NewRepo(&app)
 	handlers.NewHandlers(repo)
 	render.NewTemplates(&app)
-	http.HandleFunc("/", handlers.Repo.Home)
-	http.HandleFunc("/about", handlers.Repo.About)
-	fmt.Println(fmt.Sprintf("Starting application on port %s",portNumber))
+	fmt.Printf("Starting application on port %s",portNumber)
 	srv := &http.Server{
 		Addr: portNumber,
 		Handler: Routes(&app),

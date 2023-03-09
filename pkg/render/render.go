@@ -1,14 +1,14 @@
 package render
 
 import (
-	"go-project/pkg/models"
-	"go-project/pkg/config"
-	"path/filepath"
-	"html/template"
-	"net/http"
 	"bytes"
 	"fmt"
+	"go-project/pkg/config"
+	"go-project/pkg/models"
+	"html/template"
 	"log"
+	"net/http"
+	"path/filepath"
 )
 
 var app *config.AppConfig
@@ -32,7 +32,7 @@ func RenderTemplate(w http.ResponseWriter, tmpl string, td *models.TemplateData)
 	}
 	t, ok := tc[tmpl]
 	if !ok {
-		log.Fatal(" Could not get template for template err")
+		log.Fatal("Could not get template for template cache ", tmpl)
 	}
 	buf := new(bytes.Buffer)
 	td = addDefaultData(td)
